@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Космический плеер</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"></script>
+</head>
+<body>
+    <a-waves>
+        <svg class="js-svg"></svg>
+    </a-waves>
+
+    <canvas id="visualizer"></canvas>
+    
+    <div class="app-wrapper">
+        <div class="player-container">
+            <div class="header">
+                <h1>Космический плеер</h1>
+                <button id="themeBtn" class="icon-btn" title="Сменить настроение">✦</button>
+            </div>
+
+            <div class="upload-section">
+                <label for="fileInput" class="upload-btn">
+                    <span>📁 Загрузить треки (или альбом)</span>
+                    <input type="file" id="fileInput" accept="audio/*" multiple hidden>
+                </label>
+            </div>
+
+            <div class="now-playing">
+                <div class="track-info">
+                    <div class="track-title" id="trackTitle">Трек не выбран</div>
+                    <div class="track-subtitle" id="trackSubtitle">Загрузите музыку и выберите из библиотеки</div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <span class="time" id="currentTime">0:00</span>
+                <input type="range" id="progressBar" class="progress-bar" min="0" max="100" value="0" step="0.1">
+                <span class="time" id="duration">0:00</span>
+            </div>
+
+            <div class="controls">
+                <button id="prevBtn" class="control-btn" title="Предыдущий">⏮</button>
+                <button id="playBtn" class="control-btn play-btn" title="Играть">▶</button>
+                <button id="nextBtn" class="control-btn" title="Следующий">⏭</button>
+            </div>
+
+            <div class="secondary-controls">
+                <button id="shuffleBtn" class="tool-btn" title="Перемешать">🔀</button>
+                <button id="repeatBtn" class="tool-btn" title="Повтор">🔁</button>
+                <button id="clearBtn" class="tool-btn" title="Очистить библиотеку" style="margin-left: 10px;">🗑️</button>
+                <div class="volume-section">
+                    <span class="volume-icon" id="volumeIcon">🔊</span>
+                    <input type="range" id="volumeBar" class="volume-bar" min="0" max="100" value="70">
+                </div>
+            </div>
+
+            <div class="library-section">
+                <div class="library-header">
+                    <h2>Библиотека</h2>
+                    <span class="library-count" id="libraryCount">0</span>
+                </div>
+                <div class="library" id="library">
+                    <div class="empty-library">Здесь появятся загруженные треки</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cover-panel" id="coverPanel">
+            <div class="cover-frame">
+                <div class="cover-large-placeholder" id="coverLargePlaceholder">♪</div>
+                <img class="cover-large-img" id="coverLargeImg" alt="Обложка трека" style="display:none;">
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <audio id="audioPlayer"></audio>
+    <script src="player.js"></script>
+</body>
+</html>
